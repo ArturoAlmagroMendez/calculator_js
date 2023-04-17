@@ -1,0 +1,72 @@
+/******* PLANTILLA CSS ******/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+  body {
+    font-family: 'Poppins','sans serif';
+    background-color: #d8d8d8;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+  }
+  main {
+    width: 100%;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  a,
+  p {
+    font-family: 'Poppins','sans serif';
+  }
+  
+  h1 {
+    font-size: 4em;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  h2 {
+    font-size: 3em;
+    text-decoration: none;
+  }
+  
+  h3 {
+    font-size: 2em;
+    text-decoration: none;
+  }
+  
+  p {
+    font-size: 1.4em;
+  }
+  
+  li {
+    list-style-type: none;
+  }
+  a {
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -o-transition: 300ms;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 300ms;
+  }
+  a:hover,
+  a:focus {
+    outline: none;
+    text-decoration: none;
+    outline-offset: 0;
+  }
+  img {
+    object-fit: cover;
+    max-width: 100%;
+  }
+  video {
+    max-width: 100%;
+  }
