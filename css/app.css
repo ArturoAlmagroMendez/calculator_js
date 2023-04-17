@@ -38,10 +38,12 @@
 }
 
 .history.active {
-  transform: translateX(-80%);
+  transform: translateX(-90%);
 }
 
 .history .close-button {
+  height: 2rem;
+  width: 2rem;
   display: none;
   position: absolute;
   z-index: 1;
