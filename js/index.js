@@ -67,9 +67,10 @@ document.querySelectorAll('.button button').forEach(button => {
                 break;
             default:
                 const resultValue = result.value;
-                
                 if (value === '.' || value === '+' || value === '-' || value === '*' || value === '/' || value === '%') {
-                    if (resultValue.indexOf('.') || resultValue.indexOf('+') || resultValue.indexOf('-') || resultValue.indexOf('*') || resultValue.indexOf('/') || resultValue.indexOf('%')) {
+                    if (resultValue.indexOf('.')){
+                        
+                    }else if(resultValue.indexOf('+') || resultValue.indexOf('-') || resultValue.indexOf('*') || resultValue.indexOf('/') || resultValue.indexOf('%')) {
                         calculate();
                     }else{
                         addToOperation(value);
