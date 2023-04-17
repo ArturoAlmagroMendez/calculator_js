@@ -9,8 +9,13 @@ const closeButton = document.querySelector('.close-button');
 const paragraphContainer = document.querySelector('.history-content');
 
 function addToOperation(value) {
-    operation += value;
-    result.value = operation;
+    if(result.value == 0){
+        operation = value;
+        result.value = operation;
+    }else{
+        operation += value;
+        result.value = operation;
+    }
 }
 function calculate() {
     try {
@@ -27,13 +32,12 @@ function calculate() {
         }
         const p = document.createElement("p");
         p.textContent = x;
-        paragraphContainer.appendChild(p);
-        console.log(history);
+        const firstChild = paragraphContainer.firstChild;
+        paragraphContainer.insertBefore(p , firstChild);
         shouldClearResult = true;
     } catch (e) {
-        result.value = 'Error';
+        result.value = 'Math Error';
     }
-
 }
 function clearAll() {
     result.value = '';
@@ -44,13 +48,7 @@ function clearEntry() {
     operation = operation.slice(0, -1);
     result.value = operation;
 }
-function deleteChar() {
-    if (shouldClearResult) {
-        clearAll();
-    } else {
-        clearEntry();
-    }
-}
+
 document.querySelectorAll('.button button').forEach(button => {
     button.addEventListener('click', (event) => {
         const value = event.target.textContent;
@@ -61,21 +59,37 @@ document.querySelectorAll('.button button').forEach(button => {
             case 'CE':
                 clearEntry();
                 break;
-            case '&larr;':
-                deleteChar();
+            case '←':
+                clearEntry();
                 break;
             case '=':
                 calculate();
                 break;
             default:
+                const resultValue = result.value;
+                
+                if (value === '.' || value === '+' || value === '-' || value === '*' || value === '/' || value === '%') {
+                    if (resultValue.indexOf('.') || resultValue.indexOf('+') || resultValue.indexOf('-') || resultValue.indexOf('*') || resultValue.indexOf('/') || resultValue.indexOf('%')) {
+                        calculate();
+                    }else{
+                        addToOperation(value);
+                    } 
+                }
                 addToOperation(value);
                 break;
+                
         }
     });
 });
 document.addEventListener('keydown', (event) => {
     const key = event.key;
+    const resultValue = result.value;
     if (!isNaN(key) || key === '.' || key === '+' || key === '-' || key === '*' || key === '/' || key === '%') {
+        if (resultValue.indexOf('.') || resultValue.indexOf('+') || resultValue.indexOf('-') || resultValue.indexOf('*') || resultValue.indexOf('/') || resultValue.indexOf('%')) {
+            calculate();
+        }else{
+            addToOperation(key);
+        } 
         if (shouldClearResult) {
             result.value = '';
             shouldClearResult = false;
@@ -91,11 +105,14 @@ document.addEventListener('keydown', (event) => {
         calculate();
     }
 });
-
 iconButton.addEventListener('click', () => {
     sliderContainer.classList.toggle('active');
     iconButton.classList.toggle('active');
     closeButton.classList.toggle('active');
+    let paragraphs = document.querySelectorAll('.history-content p');
+    paragraphs.forEach(function (paragraph) {
+        paragraphContainer.removeChild(paragraph);
+    });
     history.forEach((value) => {
         const p = document.createElement("p");
         p.textContent = value;
@@ -104,9 +121,7 @@ iconButton.addEventListener('click', () => {
 });
 closeButton.addEventListener('click', () => {
     let paragraphs = document.querySelectorAll('.history-content p');
-
     paragraphs.forEach(function (paragraph) {
-        console.log("borrando");
         paragraphContainer.removeChild(paragraph);
     });
     sliderContainer.classList.toggle('active');
