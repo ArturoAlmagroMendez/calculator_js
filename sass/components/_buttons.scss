@@ -1,0 +1,53 @@
+.history .close-button{
+    height:2rem;
+    width: 2rem;
+    opacity:0;
+    position: absolute;
+    z-index:1;
+    cursor: pointer;
+    transition: .7s linear;
+}
+.history .close-button.active{
+    opacity: 1;
+}
+.history .close-button .line{
+    position: absolute;
+    width: 100%;
+    height: .2rem;
+    background-color:rgb(0, 0, 0);
+}
+.history .close-button .line:first-child{
+    transform: rotate(-45deg);
+}
+.history .close-button .line:last-child{ 
+    transform: rotate(45deg);
+} 
+.buttons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:1.2rem;
+    width: 100%;
+    
+}
+.button{
+    height: 4rem;
+    width: 20%;
+}
+.button button{
+    padding: 10%;
+    width: 100%;
+    border-radius: 25px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    height: 100%;
+    background-color: hsl(161, 98%, 61%);
+    border: none;
+    box-shadow: inset 3px 3px 3px rgba(255,255,255,.7), inset -2px -2px 3px rgba(0,0,0,.1), 2px 2px 10px rgba(0,0,0,.1);
+    transition: .3s ease-in;
+}
+.button button:hover{
+    background-color: rgb(160, 246, 240);
+    box-shadow:inset 2px 2px 4px rgba(120, 120, 120, .4), inset -3px -3px 3px rgba(255,255,255,.4);
+}
