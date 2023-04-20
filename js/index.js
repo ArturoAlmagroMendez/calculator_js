@@ -2,19 +2,27 @@ const result = document.getElementById('result');
 let history = [];
 let operation = '';
 let shouldClearResult = false;
+let operationCheck = false;
 const iconButton = document.querySelector('.icon-menu');
 const sliderContainer = document.querySelector('.history');
 const closeButton = document.querySelector('.close-button');
 const paragraphContainer = document.querySelector('.history-content');
 
 function addToOperation(value) {
-    if (result.value == 0) {
+    if(operationCheck){
+        if(!isNaN(value)){
+            operation = value;
+            result.value = operation;
+        }
+    }
+    else if(result.value == 0) {
         operation = value;
         result.value = operation;
     } else {
         operation += value;
         result.value = operation;
     }
+    operationCheck = false;
 }
 function isOperation(resultValue) {
     if (resultValue.includes('+') || resultValue.includes('-') || resultValue.includes('*') || resultValue.includes('/') || resultValue.includes('%')) {
@@ -71,12 +79,12 @@ document.querySelectorAll('.button button').forEach(button => {
                 break;
             case '=':
                 calculate();
+                operationCheck = true;
                 break;
             default:
                 let resultValue = result.value;
                 let lastChar = resultValue[resultValue.length -1];
                 if (value === '.' || value === '+' || value === '-' || value === '*' || value === '/' || value === '%') {
-                    //else if (resultValue.indexOf('.')){    
                     if (lastChar === '.' || lastChar === '+' || lastChar === '-' || lastChar === '/' || lastChar === '%') {
                         break;
                     } else if (lastChar === '*' && value === '-'){
